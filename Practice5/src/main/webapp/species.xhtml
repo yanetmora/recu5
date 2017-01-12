@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Specie</h1>
+	
+	<h:form id="frmSpecie">
+		RcbiTaxa Id:<h:inputText value="#{specieController.specie.rcbiTaxaId}" />
+		Common Name:<h:inputText value="#{specieController.specie.commonName}" />
+		Eneage String:<h:inputText value="#{specieController.specie.eneageString}" />
+		Openus:<h:inputText value="#{specieController.specie.openus}" />
+		Species:<h:inputText value="#{specieController.specie.species}" />
+		Parent Id:<h:inputText value="#{specieController.specie.parentId}" />
+		Legh value:<h:inputText value="#{specieController.specie.leghvalue}" />
+	    Right value:<h:inputText value="#{specieController.specie.rightvalue}" />
+	    TaxonomicRank:<h:inputText value="#{specieController.specie.taxonomicRank}" />
+	 
+	 <h:commandButton action="#{specieController.save}" value="Save" >
+		<f:ajax execute="frmSpecie" render="frmSpecie"/>
+		</h:commandButton>
+		
+		<h:commandButton rendered="#{specieController.editMode}"
+		 action="#{specieController.save}" value="Cancel" >
+			<f:ajax render="frmSpecie"></f:ajax>
+		</h:commandButton>
+		
+	<h:dataTable value="#{specieController.species}" var="s" id="dtSpecie">
+		<h:column>
+			<f:facet name="header">ID</f:facet>
+			#{s.id}
+		</h:column>
+		<h:column>
+			<f:facet name="header">RcbiTaxa Id</f:facet>
+			#{s.rcbiTaxaId}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Common Name</f:facet>
+			#{s.commonName}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Eneage String</f:facet>
+			#{s.eneageString}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Openus</f:facet>
+			#{s.openus}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Species</f:facet>
+			#{s.species}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Parent Id</f:facet>
+			#{s.parentId}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Legh value</f:facet>
+			#{s.leghvalue}
+		</h:column>
+
+         	<h:column>
+			<f:facet name="header">Rightvalue</f:facet>
+			#{s.rightvalue}
+		</h:column>
+		
+		
+		
+         	<h:column>
+			<f:facet name="header">TaxonomicRank</f:facet>
+			#{s.taxonomicRank}
+		</h:column>
+
+
+
+
+		<h:column>
+			<f:facet name="header">Actions</f:facet>
+			<h:commandButton 
+			action="#{specieController.delete(s)}"
+			 value="Delete" 
+			 onclick="return window.confirm('Are you sure?')">
+			 <f:ajax render="frmSpecie:dtSpecie"/>
+			 </h:commandButton>
+			 <h:commandButton action="#{specieController.update(s)}" value="Update">
+			 	<f:ajax render="frmSpecie"/>
+			 </h:commandButton>
+		</h:column>
+	</h:dataTable>
+</h:form>
+	
+</body>  
+</html>
+
+
